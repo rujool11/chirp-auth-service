@@ -20,6 +20,6 @@ func CreateUserTableIfDoesNotExist() {
 		log.Fatalf("SQL query error when creating table: %v", err)
 	}
 
-	log.Printf("users table is ready")
+	log.Printf("Users table is ready")
 
 }
