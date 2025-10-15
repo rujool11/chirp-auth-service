@@ -8,8 +8,10 @@ import (
 func main() {
 	// initialize DB connection
 	db.InitDB()
+	db.CreateUserTableIfDoesNotExist()
 	defer db.DB.Close()
 
+	// gin.Default() is the router, and gin.Context() is the current HTTP req and res
 	r := gin.Default()
 
 	r.GET("/", func(c *gin.Context) {
