@@ -77,6 +77,53 @@ func RegisterUser(c *gin.Context) {
 
 func LoginUser(c *gin.Context) {
 
+	// input struct for incoming payload
+	var input struct {
+		Email    string `json:"email" binding:"required"`
+		Password string `json:"password" binding:"required"`
+	}
+
+	err := c.ShouldBindJSON(&input)
+	if err != nil {
+		c.JSON(400, gin.H{"error": "Failed to bind to JSON"})
+		return
+	}
+
+	query := `SELECT id, username, email, password_hash, bio, likes_count, followers_count,
+			following_count, tweets_count, created_at FROM users WHERE email=$1`
+
+	var user models.User
+
+	err = db.DB.QueryRow(c, query, input.Email).Scan(
+		&user.ID,
+		&user.Username,
+		&user.Email,
+		&user.PasswordHash,
+		&user.Bio,
+		&user.LikesCount,
+		&user.FollowersCount,
+		&user.FollowingCount,
+		&user.TweetsCount,
+		&user.CreatedAt,
+	)
+
+	if err != nil {
+		c.JSON(401, gin.H{"error": "Invalid email or password"})
+		return
+	}
+
+	// validate password
+	if !utils.ValidatePassword(user.PasswordHash, input.Password) {
+		c.JSON(401, gin.H{"error": "Invalid password"})
+	}
+
+	// generate token
+	token, err := utils.GenerateJWT(user.ID)
+	if err != nil {
+		c.JSON(500, gin.H{"error": "Could not generate token"})
+	}
+
+	c.JSON(200, gin.H{"user": user, "token": token})
 }
 
 func DeleteUser(c *gin.Context) {
