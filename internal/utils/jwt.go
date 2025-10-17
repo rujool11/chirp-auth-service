@@ -18,7 +18,7 @@ type Claims struct {
 
 // create jwt token given user id
 func GenerateJWT(ID int) (string, error) {
-	expiration := time.Now().Add(24 * 7 * 4 * time.Hour) // validity 4 weeks
+	expiration := time.Now().Add(24 * 7 * 2 * time.Hour) // validity 2 weeks
 
 	// pointer to a struct
 	claims := &Claims{
@@ -31,4 +31,24 @@ func GenerateJWT(ID int) (string, error) {
 
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims) // HMAC SHA 256 signing
 	return token.SignedString(jwtKey)                          // automatically returns string and error
+}
+
+// parses JWT token and returns user ID and error
+func ValidateJWT(tokenStr string) (int, error) {
+	claims := &Claims{}
+
+	// parse tokenStr, store in claims
+	// lambda function is just a function that can provide correct key based on headers
+	// returns interface to denote that return value can be of any type (since different
+	// types of keys based on algorithms)
+	// interface{} denotes any type in Go
+	token, err := jwt.ParseWithClaims(tokenStr, claims, func(token *jwt.Token) (interface{}, error) {
+		return jwtKey, nil
+	})
+
+	if err != nil || !token.Valid {
+		return 0, err
+	}
+
+	return claims.ID, nil
 }
