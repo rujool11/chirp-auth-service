@@ -6,7 +6,9 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
+	"github.com/rujool11/chirp-auth-service/internal/controllers"
 	"github.com/rujool11/chirp-auth-service/internal/db"
+	"github.com/rujool11/chirp-auth-service/internal/middleware"
 )
 
 func main() {
@@ -22,6 +24,15 @@ func main() {
 
 	// gin.Default() is the router, and gin.Context() is the current HTTP req and res
 	r := gin.Default()
+
+	auth := r.Group("/auth")
+	{
+		auth.POST("/register", controllers.RegisterUser)
+		auth.POST("/login", controllers.LoginUser)
+		auth.DELETE("/delete", middleware.AuthMiddleware(), controllers.DeleteUser)
+	}
+
+	r.GET("/me", middleware.AuthMiddleware(), controllers.GetProfile)
 
 	r.GET("/", func(c *gin.Context) {
 		c.JSON(200, gin.H{
