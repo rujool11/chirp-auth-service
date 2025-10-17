@@ -34,6 +34,12 @@ func main() {
 
 	r.GET("/me", middleware.AuthMiddleware(), controllers.GetProfile)
 
+	update := r.Group("/update")
+	{
+		update.PUT("/password", middleware.AuthMiddleware(), controllers.UpdatePassword)
+		update.PUT("/bio", middleware.AuthMiddleware(), controllers.UpdateBio)
+	}
+
 	r.GET("/", func(c *gin.Context) {
 		c.JSON(200, gin.H{
 			"message": "Hello from chirp-auth-service",
