@@ -39,10 +39,9 @@ func ValidateJWT(tokenStr string) (int, error) {
 
 	// parse tokenStr, store in claims
 	// lambda function is just a function that can provide correct key based on headers
-	// returns interface to denote that return value can be of any type (since different
+	// returns any to denote that return value can be of any type (since different
 	// types of keys based on algorithms)
-	// interface{} denotes any type in Go
-	token, err := jwt.ParseWithClaims(tokenStr, claims, func(token *jwt.Token) (interface{}, error) {
+	token, err := jwt.ParseWithClaims(tokenStr, claims, func(token *jwt.Token) (any, error) {
 		return jwtKey, nil
 	})
 
