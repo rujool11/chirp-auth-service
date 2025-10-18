@@ -7,7 +7,7 @@ import (
 
 func AuthMiddleware() gin.HandlerFunc {
 	return func(c *gin.Context) {
-		tokenStr := c.GetHeader("Authorization")
+		tokenStr := c.GetHeader("x-jwt-token")
 
 		if tokenStr == "" {
 			c.AbortWithStatusJSON(401, gin.H{
