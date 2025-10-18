@@ -1,6 +1,7 @@
 # chirp-auth-service
 
 Authentication and profile managment for chirp
+
 Built with Go, Gin and PostgreSQL 
 
 
@@ -10,7 +11,8 @@ BASE_URL: `localhost:8001` (if running locally; unless different port used)
 
 ### Root
 
-<b><span style="color:green;">GET</span><b> `/`
+![GET](https://img.shields.io/badge/GET-%2334D058?style=for-the-badge&logo=postman&logoColor=white) `/`
+
 Authentication: Public
 
 Returns `"Hello from  chirp-auth-service"`
@@ -24,7 +26,8 @@ Response
 
 ### User Registration
 
-<b><span style="color:yellow;">POST</span><b> `/auth/register`
+![POST](https://img.shields.io/badge/POST-%23FF5733?style=for-the-badge&logo=postman&logoColor=white) `/auth/register`
+
 Authentication: Public
 
 Takes username, email and password; adds user to database; returns user and JWT
@@ -58,7 +61,8 @@ Response
 
 ### User Login
 
-<b><span style="color:yellow">POST</span><b> `/auth/login`
+![POST](https://img.shields.io/badge/POST-%23FF5733?style=for-the-badge&logo=postman&logoColor=white) `/auth/login`
+
 Authentication: Public
 
 Takes email and password; validates credentials; returns user and JWT
@@ -91,7 +95,8 @@ Response
 
 ### User Deletion
 
-<b><span style="color:red;">DELETE</span></b> `/auth/delete`
+![DELETE](https://img.shields.io/badge/DELETE-%23E74C3C?style=for-the-badge&logo=postman&logoColor=white)  `/auth/delete`
+
 Authentication: JWT to be provided in `x-jwt-token` header
 
 Deletes user associated with provided JWT
@@ -105,7 +110,8 @@ Response
 
 ### Get User 
 
-<b><span style="color:green;">GET</span></b> `/me`
+![GET](https://img.shields.io/badge/GET-%2334D058?style=for-the-badge&logo=postman&logoColor=white) `/me`
+
 Authentication: JWT to be provided in `x-jwt-token` header
 
 Returns user associated with provided JWT
@@ -129,7 +135,8 @@ Response
 
 ### Update Bio
 
-<b><span style="color:blue;">PUT</span></b> `/update/bio`
+![PUT](https://img.shields.io/badge/PUT-%231DB954?style=for-the-badge&logo=postman&logoColor=white) `/update/bio`
+
 Authentication: JWT to be provided in `x-jwt-token` header
 
 Takes bio and updates it in database for user associated with provided JWT; returns updated bio
@@ -150,7 +157,8 @@ Response
 
 ### Update Password
 
-<b><span style="color:blue;">PUT</span></b> `/update/password`
+![PUT](https://img.shields.io/badge/PUT-%231DB954?style=for-the-badge&logo=postman&logoColor=white) `/update/password`
+
 Authentication: JWT to be provided in `x-jwt-token` header
 
 Takes old and new password; validates and updates in database 
