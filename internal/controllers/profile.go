@@ -40,6 +40,31 @@ func GetProfile(c *gin.Context) {
 }
 
 func UpdateBio(c *gin.Context) {
+	userIDVal, exists := c.Get("user_id")
+	if !exists {
+		c.JSON(401, gin.H{"error": "Unauthorized"})
+		return
+	}
+
+	userID := userIDVal.(int)
+	var input struct {
+		Bio string `json:"bio" binding:"required"`
+	}
+
+	err := c.ShouldBindJSON(&input)
+	if err != nil {
+		c.JSON(400, gin.H{"error": "Failed to bind to JSON"})
+		return
+	}
+
+	query := `UPDATE users SET bio=$1 WHERE id=$2`
+	_, err = db.DB.Exec(c, query, input.Bio, userID)
+	if err != nil {
+		c.JSON(500, gin.H{"error": "Failed to update bio"})
+		return
+	}
+
+	c.JSON(200, gin.H{"message": "Updated bio successfully", "bio": input.Bio})
 
 }
 
