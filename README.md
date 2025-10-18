@@ -1,8 +1,8 @@
 # chirp-auth-service
 
-![Go](https://img.shields.io/badge/Go-1.24-blue?style=flat-square&logo=go&logoColor=white)
-![Gin](https://img.shields.io/badge/Gin-1.9-lightgrey?style=flat-square&logo=gin&logoColor=white)
-![PostgreSQL](https://img.shields.io/badge/Postgres-15-blue?style=flat-square&logo=postgresql&logoColor=white)
+![Go](https://img.shields.io/badge/Go-blue?style=for-the-badge&logo=go&logoColor=white)
+![Gin](https://img.shields.io/badge/Gin-lightgrey?style=for-the-badge&logo=gin&logoColor=white)
+![PostgreSQL](https://img.shields.io/badge/Postgres-blue?style=for-the-badge&logo=postgresql&logoColor=white)
 
 
 Authentication and profile managment for chirp
