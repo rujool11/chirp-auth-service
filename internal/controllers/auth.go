@@ -128,4 +128,32 @@ func LoginUser(c *gin.Context) {
 
 func DeleteUser(c *gin.Context) {
 
+	userIDVal, exists := c.Get("user_id")
+	if !exists {
+		c.JSON(401, gin.H{"error": "Unauthorized"})
+		return
+	}
+
+	// convert to int
+	userID := userIDVal.(int)
+
+	query := `DELETE FROM users WHERE id=$1`
+
+	// Exec returs res and err, res gives info about query execution
+	// err is set only if query itself fails
+	res, err := db.DB.Exec(c, query, userID)
+	if err != nil {
+		c.JSON(500, gin.H{"error": err.Error()})
+		return
+	}
+
+	// get rowsAffected from response
+	rowsAffected := res.RowsAffected()
+	if rowsAffected == 0 {
+		c.JSON(404, gin.H{"error": "User not found"})
+		return
+	}
+
+	c.JSON(200, gin.H{"message": "Successfuly deleted user"})
+
 }
