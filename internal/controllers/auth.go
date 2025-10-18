@@ -115,12 +115,14 @@ func LoginUser(c *gin.Context) {
 	// validate password
 	if !utils.ValidatePassword(user.PasswordHash, input.Password) {
 		c.JSON(401, gin.H{"error": "Invalid password"})
+		return
 	}
 
 	// generate token
 	token, err := utils.GenerateJWT(user.ID)
 	if err != nil {
 		c.JSON(500, gin.H{"error": "Could not generate token"})
+		return
 	}
 
 	c.JSON(200, gin.H{"user": user, "token": token})
