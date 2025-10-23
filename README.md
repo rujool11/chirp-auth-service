@@ -184,6 +184,115 @@ Response
 }
 ```
 
+### Get All Users 
+
+![GET](https://img.shields.io/badge/GET-%2334D058?style=for-the-badge&logo=postman&logoColor=white) `/users/`
+
+Authentication: Returns all users
+
+Returns all users
+
+Response 
+```
+{
+    "users": [
+        {
+            "id": 16,
+            "username": "test",
+            "email": "test@gmail.com",
+            "bio": "",
+            "likes_count": 0,
+            "followers_count": 1,
+            "following_count": 0,
+            "tweets_count": 0,
+            "created_at": "2025-10-21T14:45:58.756466Z"
+        },
+        {
+            "id": 14,
+            "username": "root",
+            "email": "root@gmail.com",
+            "bio": "Alison im lost",
+            "likes_count": 0,
+            "followers_count": 2,
+            "following_count": 0,
+            "tweets_count": 0,
+            "created_at": "2025-10-18T15:29:04.796502Z"
+        },
+        {
+            "id": 18,
+            "username": "test3",
+            "email": "test3@gmail.com",
+            "bio": "",
+            "likes_count": 0,
+            "followers_count": 0,
+            "following_count": 2,
+            "tweets_count": 0,
+            "created_at": "2025-10-23T20:03:12.704324Z"
+        },
+        {
+            "id": 17,
+            "username": "test2",
+            "email": "test2@gmail.com",
+            "bio": "",
+            "likes_count": 0,
+            "followers_count": 0,
+            "following_count": 1,
+            "tweets_count": 0,
+            "created_at": "2025-10-21T15:28:52.345535Z"
+        }
+    ]
+}
+```
+
+### Get User By Id 
+
+![GET](https://img.shields.io/badge/GET-%2334D058?style=for-the-badge&logo=postman&logoColor=white) `/users/:id`
+
+Authentication: public
+
+Returns user associated with provided id
+
+Response 
+```
+{
+    "user": {
+        "id": 14,
+        "username": "root",
+        "email": "root@gmail.com",
+        "bio": "Alison im lost",
+        "likes_count": 0,
+        "followers_count": 2,
+        "following_count": 0,
+        "tweets_count": 0,
+        "created_at": "2025-10-18T15:29:04.796502Z"
+    }
+}
+```
+
+### Get User By Username 
+
+![GET](https://img.shields.io/badge/GET-%2334D058?style=for-the-badge&logo=postman&logoColor=white) `/users/username/:username`
+
+Authentication: public
+
+Returns user associated with provided username
+
+Response 
+```
+{
+    "user": {
+        "id": 18,
+        "username": "test3",
+        "email": "test3@gmail.com",
+        "bio": "",
+        "likes_count": 0,
+        "followers_count": 0,
+        "following_count": 2,
+        "tweets_count": 0,
+        "created_at": "2025-10-23T20:03:12.704324Z"
+    }
+}
+```
 
 ## Project Structure
 
