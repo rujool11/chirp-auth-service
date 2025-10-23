@@ -34,6 +34,13 @@ func main() {
 
 	r.GET("/me", middleware.AuthMiddleware(), controllers.GetProfile)
 
+	users := r.Group("/users")
+	{
+		users.GET("/", controllers.GetAllUsers)
+		users.GET("/username/:username", controllers.GetUserByUsername)
+		users.GET(":id", controllers.GetUserById)
+	}
+
 	update := r.Group("/update")
 	{
 		update.PUT("/password", middleware.AuthMiddleware(), controllers.UpdatePassword)
