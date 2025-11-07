@@ -15,7 +15,7 @@ func RegisterUser(c *gin.Context) {
 	var input struct {
 		Username string `json:"username" binding:"required"`
 		Email    string `json:"email" binding:"required"`
-		Password string `json:"password" binding:"required"` // min 6 chars
+		Password string `json:"password" binding:"required"`
 	}
 
 	// convert input JSON to struct
